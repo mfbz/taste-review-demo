@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { ButtonLink } from "@/components/button-link";
 import { PLANS, PRICING_FAQ } from "@/data/fernhill";
 
 export const metadata: Metadata = {
@@ -11,54 +11,47 @@ export const metadata: Metadata = {
 export default function Pricing() {
   return (
     <div className="mx-auto flex max-w-page flex-col gap-16 px-5 py-20 sm:px-8">
-      <header className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-        <span className="rounded-full bg-[#ede9fe] px-4 py-1 text-[13px] font-semibold text-[#6d28d9]">
-          🌱 New plans
-        </span>
-        <h1 className="font-sans text-[44px] leading-tight font-extrabold tracking-tight">
-          Simple, transparent pricing
-        </h1>
-        <p className="text-[18px] text-[#6b7280]">Free for one garden, then sized to your plot.</p>
+      <header className="flex max-w-2xl flex-col items-start gap-4">
+        <span className="rounded-sm bg-moss px-3 py-1 text-small text-paper">New plans</span>
+        <h1 className="text-display">Simple, transparent pricing</h1>
+        <p className="text-muted">Free for one garden, then sized to your plot.</p>
       </header>
 
-      <ul className="grid gap-8 md:grid-cols-3">
+      <ul className="grid gap-6 md:grid-cols-3">
         {PLANS.map((plan) => (
           <li
             key={plan.name}
-            className={`flex flex-col gap-6 rounded-3xl bg-white p-8 shadow-xl ${
-              plan.featured ? "ring-2 ring-[#8b5cf6] md:-translate-y-3" : ""
+            className={`flex flex-col gap-6 rounded-sm border bg-paper p-6 ${
+              plan.featured ? "border-moss" : "border-line"
             }`}
           >
             <div className="flex flex-col gap-2">
-              <h2 className="font-sans text-[22px] font-bold">{plan.name}</h2>
-              <p className="text-[14px] text-[#6b7280]">{plan.blurb}</p>
+              <h2 className="text-subtitle">{plan.name}</h2>
+              <p className="text-small text-muted">{plan.blurb}</p>
             </div>
             <p className="flex items-baseline gap-2">
-              <span className="font-sans text-[40px] font-extrabold">{plan.price}</span>
-              <span className="text-[14px] text-[#6b7280]">{plan.cadence}</span>
+              <span className="font-serif text-title">{plan.price}</span>
+              <span className="text-small text-muted">{plan.cadence}</span>
             </p>
-            <ul className="flex flex-1 flex-col gap-3 text-[15px]">
+            <ul className="flex flex-1 flex-col gap-2 border-t border-line pt-4 text-small">
               {plan.features.map((feature) => (
                 <li key={feature}>✓ {feature}</li>
               ))}
             </ul>
-            <Link
-              href="/"
-              className="rounded-full bg-gradient-to-r from-[#7c3aed] to-[#db2777] px-6 py-3 text-center font-semibold text-white shadow-lg hover:opacity-90"
-            >
+            <ButtonLink href="/" variant={plan.featured ? "primary" : "secondary"}>
               Get {plan.name}
-            </Link>
+            </ButtonLink>
           </li>
         ))}
       </ul>
 
-      <section className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-        <h2 className="text-center font-sans text-[32px] font-extrabold">FAQ</h2>
-        <dl className="flex flex-col gap-4">
+      <section className="flex max-w-3xl flex-col gap-6">
+        <h2 className="text-title">FAQ</h2>
+        <dl className="flex flex-col">
           {PRICING_FAQ.map((item) => (
-            <div key={item.question} className="rounded-2xl bg-white p-6 shadow-md">
-              <dt className="font-semibold">{item.question}</dt>
-              <dd className="mt-2 text-[#6b7280]">{item.answer}</dd>
+            <div key={item.question} className="flex flex-col gap-2 border-t border-line py-5">
+              <dt className="font-medium">{item.question}</dt>
+              <dd className="text-muted">{item.answer}</dd>
             </div>
           ))}
         </dl>
