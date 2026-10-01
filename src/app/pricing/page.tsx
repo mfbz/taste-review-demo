@@ -11,8 +11,9 @@ export const metadata: Metadata = {
 export default function Pricing() {
   return (
     <div className="mx-auto flex max-w-page flex-col gap-16 px-5 py-20 sm:px-8">
-      <header className="flex max-w-2xl flex-col gap-4">
-        <h1 className="text-display">Pricing</h1>
+      <header className="flex max-w-2xl flex-col items-start gap-4">
+        <span className="rounded-sm bg-moss px-3 py-1 text-small text-paper">New plans</span>
+        <h1 className="text-display">Simple, transparent pricing</h1>
         <p className="text-muted">Free for one garden, then sized to your plot.</p>
       </header>
 
@@ -34,18 +35,18 @@ export default function Pricing() {
             </p>
             <ul className="flex flex-1 flex-col gap-2 border-t border-line pt-4 text-small">
               {plan.features.map((feature) => (
-                <li key={feature}>{feature}</li>
+                <li key={feature}>✓ {feature}</li>
               ))}
             </ul>
             <ButtonLink href="/" variant={plan.featured ? "primary" : "secondary"}>
-              Choose {plan.name}
+              Get {plan.name}
             </ButtonLink>
           </li>
         ))}
       </ul>
 
       <section className="flex max-w-3xl flex-col gap-6">
-        <h2 className="text-title">Questions</h2>
+        <h2 className="text-title">FAQ</h2>
         <dl className="flex flex-col">
           {PRICING_FAQ.map((item) => (
             <div key={item.question} className="flex flex-col gap-2 border-t border-line py-5">
